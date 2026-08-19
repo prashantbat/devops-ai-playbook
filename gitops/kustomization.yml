@@ -17,6 +17,7 @@ resources:
   - k8s/backend/user-service.yml
   - k8s/frontend/deployment.yml
   - k8s/grafana-dashboard.yml
+  - k8s/database/restore-job.yml
 
 configMapGenerator:
   - name: boutique-db-dump
