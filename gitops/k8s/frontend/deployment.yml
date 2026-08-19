@@ -14,13 +14,17 @@ spec:
         app: frontend
     spec:
       containers:
-        - name: frontend
-          image: <AWS_ACCOUNT_ID>.dkr.ecr.us-east-1.amazonaws.com/frontend:1ebec3729cd10fe1eeac6f0858fba58e2da07956
+        - name: nginx
+          image: nginx:stable-alpine
           ports:
-            - containerPort: 3000
-          env:
-            - name: REACT_APP_API_URL
-              value: "http://gateway:3001/api"
+            - containerPort: 80
+          resources:
+            requests:
+              cpu: 50m
+              memory: 64Mi
+            limits:
+              cpu: 100m
+              memory: 128Mi
 ---
 apiVersion: v1
 kind: Service
@@ -32,7 +36,6 @@ spec:
     app: frontend
   ports:
     - protocol: TCP
-      port: 3000
-      targetPort: 3000
+      port: 80
+      targetPort: 80
   type: ClusterIP
-

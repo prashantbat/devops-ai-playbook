@@ -6,14 +6,14 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: 'https://github.com/vishakhasadhwani/DevOps-Practice-Guide.git'
+    repoURL: 'https://github.com/prashantbat/devops-ai-playbook.git'
     targetRevision: main
     path: gitops
+    directory:
+      recurse: true
   destination:
     server: 'https://kubernetes.default.svc'
     namespace: boutique
-  syncPolicy: {}
-  # syncPolicy:
-  #   automated:
-  #     prune: true
-  #     selfHeal: true
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
